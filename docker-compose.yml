@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  app:
+    build: ./docker
+    container_name: test-tasks-app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ./src:/var/www
+  nginx:
+    image: nginx:alpine
+    container_name: test-tasks-nginx
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+  db:
+    image: mysql/mysql-server:8.0
+    container_name: test-tasks-db
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tasks_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mysql-db:/var/lib/mysql
+
+volumes:
+  mysql-db:
