@@ -1,6 +1,6 @@
 {
     "require": {
-        "fzaninotto/faker": "^1.5"
+        "fakerphp/faker": "^1.19"
     },
     "autoload": {
         "psr-4": {

@@ -2,12 +2,12 @@ version: "3.8"
 
 services:
   app:
-    build: ./docker
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
     container_name: test-tasks-app
     restart: always
     working_dir: /var/www/
-    volumes:
-      - ./src:/var/www
   nginx:
     image: nginx:alpine
     container_name: test-tasks-nginx
